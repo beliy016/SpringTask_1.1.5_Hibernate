@@ -1,11 +1,14 @@
 package jm.task.core.jdbc.service;
 
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.util.Util;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public interface UserService {
+    Util getUtil();
+
     void createUsersTable() throws SQLException;
 
     void dropUsersTable() throws SQLException;
