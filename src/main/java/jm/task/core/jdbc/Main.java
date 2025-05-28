@@ -13,8 +13,6 @@ public class Main {
         // реализуйте алгоритм здесь
         UserService us = new UserServiceImpl();
 
-
-
         us.createUsersTable();
 
         us.saveUser("Ivan", "Petrov", (byte) 36);
@@ -31,6 +29,6 @@ public class Main {
 
         us.dropUsersTable();
 
-        Util.closeSessionFactory(us.getSF());
+        Util.closeSessionFactory();
     }
 }

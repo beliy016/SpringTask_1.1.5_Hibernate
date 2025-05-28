@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface UserService {
 
-    SessionFactory getSF() throws SQLException;
-
     void createUsersTable() throws SQLException;
 
     void dropUsersTable() throws SQLException;

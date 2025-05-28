@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface UserDao {
-    SessionFactory getSF() throws SQLException;
 
     void createUsersTable() throws SQLException;
 

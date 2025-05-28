@@ -27,6 +27,8 @@ public class Util {
         return null;
     }
 
+    private static SessionFactory sessionFactory;
+
     public static SessionFactory getSessionFactory() {
         try {
             Configuration configuration = new Configuration();
@@ -53,13 +55,14 @@ public class Util {
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
 
-            return configuration.buildSessionFactory(serviceRegistry);
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            return sessionFactory;
         } catch (Exception e) {
             throw e;
         }
     }
 
-    public static void closeSessionFactory(SessionFactory sessionFactory) {
+    public static void closeSessionFactory() {
         if (sessionFactory != null) {
             try {
                 sessionFactory.close();

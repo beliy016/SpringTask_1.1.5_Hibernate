@@ -16,11 +16,6 @@ public class UserDaoJDBCImpl implements UserDao {
     Connection connection;
     PreparedStatement ps;
 
-    @Override
-    public SessionFactory getSF() {
-        return null;
-    }
-
     private static final String QUERY_NEW_TABLE = "CREATE TABLE users(id BIGINT AUTO_INCREMENT PRIMARY KEY," +
             "    name     varchar(45)  not null," +
             "    lastName varchar(256) not null," +

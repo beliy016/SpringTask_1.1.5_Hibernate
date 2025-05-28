@@ -13,12 +13,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private UserDao userDaoHibernate = new UserDaoHibernateImpl();
 
-
-    @Override
-    public SessionFactory getSF() throws SQLException {
-        return userDaoHibernate.getSF();
-    }
-
     public UserServiceImpl() throws SQLException {
     }
 
