@@ -31,6 +31,6 @@ public class Main {
 
         us.dropUsersTable();
 
-        us.getUtil().closeSessionFactory();
+        Util.closeSessionFactory(us.getSF());
     }
 }

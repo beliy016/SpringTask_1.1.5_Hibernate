@@ -5,17 +5,16 @@ import jm.task.core.jdbc.util.Util;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
 
-    Util util = new Util();
+    SessionFactory sessionFactory = Util.getSessionFactory();
 
     @Override
-    public Util getUtil() {
-        return util;
+    public SessionFactory getSF() {
+        return sessionFactory;
     }
 
     private static final String QUERY_NEW_TABLE = "CREATE TABLE users(id BIGINT AUTO_INCREMENT PRIMARY KEY," +
@@ -29,11 +28,10 @@ public class UserDaoHibernateImpl implements UserDao {
 
     }
 
-
     @Override
     public void createUsersTable() {
         try {
-            Session session = util.getSession();
+            Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
             session.createSQLQuery(QUERY_NEW_TABLE).addEntity(User.class).executeUpdate();
             transaction.commit();
@@ -45,7 +43,7 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void dropUsersTable() {
         try {
-            Session session = util.getSession();
+            Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
             session.createSQLQuery(QUERY_REMOVE_TABLE).addEntity(User.class).executeUpdate();
             transaction.commit();
@@ -58,7 +56,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void saveUser(String name, String lastName, byte age) {
         Transaction transaction = null;
         try {
-            Session session = util.getSession();
+            Session session = sessionFactory.getCurrentSession();
             transaction = session.beginTransaction();
             session.save(new User(name, lastName, age));
             transaction.commit();
@@ -74,7 +72,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void removeUserById(long id) {
         Transaction transaction = null;
         try {
-            Session session = util.getSession();
+            Session session = sessionFactory.getCurrentSession();
             transaction = session.beginTransaction();
             User us = session.get(User.class, id);
             session.delete(us);
@@ -92,7 +90,7 @@ public class UserDaoHibernateImpl implements UserDao {
         List<User> list = new ArrayList<>();
         Transaction transaction = null;
         try {
-            Session session = util.getSession();
+            Session session = sessionFactory.getCurrentSession();
             transaction = session.beginTransaction();
             list = session.createQuery("from User").getResultList();
             transaction.commit();
@@ -108,7 +106,7 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void cleanUsersTable() {
         try {
-            Session session = util.getSession();
+            Session session = sessionFactory.getCurrentSession();
             Transaction transaction = session.beginTransaction();
             session.createSQLQuery(QUERY_CLEAN_TABLE).addEntity(User.class).executeUpdate();
             transaction.commit();

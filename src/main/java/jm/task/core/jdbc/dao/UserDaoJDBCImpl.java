@@ -2,6 +2,7 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
+import org.hibernate.SessionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,8 +17,8 @@ public class UserDaoJDBCImpl implements UserDao {
     PreparedStatement ps;
 
     @Override
-    public Util getUtil() {
-        return this.util;
+    public SessionFactory getSF() {
+        return null;
     }
 
     private static final String QUERY_NEW_TABLE = "CREATE TABLE users(id BIGINT AUTO_INCREMENT PRIMARY KEY," +
